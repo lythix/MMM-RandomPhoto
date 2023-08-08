@@ -23,7 +23,7 @@ Module.register("MMM-RandomPhoto",{
 		var self = this;
 
 		var url = self.config.url + (self.config.url.indexOf('?') > -1 ? '&' : '?') + (new Date().getTime());
-		var img = $('<img />').attr('src', url);
+		var img = $('<img />').attr('src', url).addClass('fit-screen'); // Add class 'fit-screen'
 
 		img.on('load', function() {
 				$('#mmm-photos-placeholder1').attr('src', url).animate({
@@ -47,12 +47,17 @@ Module.register("MMM-RandomPhoto",{
 
 	getDom: function() {
 		var wrapper = document.createElement("div");
-		wrapper.innerHTML = '<img id="mmm-photos-placeholder1" style="opacity: 0; position: absolute" /><img id="mmm-photos-placeholder2" style="opacity: 0; position: absolute" />';
+		wrapper.innerHTML = '<img class="fit-screen" id="mmm-photos-placeholder1" style="opacity: 0; position: absolute" /><img class="fit-screen" id="mmm-photos-placeholder2" style="opacity: 0; position: absolute" />'; // Add class 'fit-screen'
 		return wrapper;
 	},
 	getScripts: function() {
-    return [
+		return [
 			this.file('node_modules/jquery/dist/jquery.min.js')
-    ]
+		]
+	},
+	getStyles: function() {
+		return [
+			this.file('MMM-RandomPhoto.css') // Reference the CSS file
+		]
 	}
 });
